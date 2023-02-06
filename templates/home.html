@@ -1,0 +1,320 @@
+{% extends 'base.html' %}
+
+{% block title %}Home | Zed-store{% endblock title %}
+
+{% block content %}
+    {% load static %}
+    <section id="slider">
+        <!--slider-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#slider-carousel" data-slide-to="1"></li>
+                            <li data-target="#slider-carousel" data-slide-to="2"></li>
+                        </ol>
+    
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <div class="col-sm-6">
+                                    <h1><span>Zed</span>-STORE</h1>
+                                    <h2>E-Commerce store with Django</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. </p>
+                                    <button type="button" class="btn btn-default get">Get it now</button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <img src="{% static 'images/home/carousel-1.png' %}" width='441px' height='484px' style='margin-top:90px' class="girl img-responsive" alt="" />
+                                    <!--<img src="{% static 'images/home/pricing.png' %}" class="pricing" alt="" />-->
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="col-sm-6">
+                                    <h1><span>Zed</span>-STORE</h1>
+                                    <h2>100% Responsive Website</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. </p>
+                                    <button type="button" class="btn btn-default get">Get it now</button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <img src="{% static 'images/home/carousel-2.png' %}" width='441px' height='484px' style='margin-top:90px' class="girl img-responsive" alt="" />
+                                    <!--<img src="{% static 'images/home/pricing.png' %}" class="pricing" alt="" />-->
+                                </div>
+                            </div>
+    
+                            <div class="item">
+                                <div class="col-sm-6">
+                                    <h1><span>Zed</span>-STORE</h1>
+                                    <h2>Full Featured Website</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. </p>
+                                    <button type="button" class="btn btn-default get">Get it now</button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <img src="{% static 'images/home/carousel-3.png' %}" width='441px' height='484px'  style='margin-top:90px' class="girl img-responsive" alt="" />
+                                    <!--<img src="{% static 'images/home/pricing.png' %}" class="pricing" alt="" />484x441-->
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/slider-->
+    
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="left-sidebar">
+                        <h2>Category</h2>
+                        <div class="panel-group category-products" id="accordian">
+                            <!--category-products-->
+                            {% for category in categories %}
+                                {% if category.slug == "parents" %}
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordian" href="#{{category.name}}">
+                                                    <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                                    {{category.name}}
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="{{category.name}}" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <ul>
+                                                    {% for child in category.children.all %}
+                                                        <li><a href="#">{{child.name}}</a></li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% elif category.slug == "parent" %}
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordian" href="#{{category.name}}">
+                                                <span class="badge pull-right"></span>
+                                                {{category.name}}
+                                            </a>
+                                        </h4>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <!--/category-products-->
+    
+                        <div class="brands_products">
+                            <!--brands_products-->
+                            <h2>Brands</h2>
+                            <div class="brands-name">
+                                <ul class="nav nav-pills nav-stacked">
+                                    {% for brand, count in brands.items %}
+                                        <li><a href="#"> <span class="pull-right">{{count}}</span>{{brand}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <!--/brands_products-->
+    
+                        <div class="price-range">
+                            <!--price-range-->
+                            <h2>Price Range</h2>
+                            <div class="well text-center">
+                                <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600"
+                                    data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br />
+                                <b class="pull-left">$ 0</b> <b class="pull-right">$ 10,000</b>
+                            </div>
+                        </div>
+                        <!--/price-range-->
+    
+                        <!--<div class="shipping text-center">
+                            <img src="{% static 'images/home/shipping.jpg' %}" alt="" />
+                        </div> /shipping-->
+    
+                    </div>
+                </div>
+    
+                <div class="col-sm-9 padding-right">
+                    <!--features_items-->
+                    <div class="features_items">
+                        
+                        <h2 class="title text-center">Features Items</h2>
+                        {% for product in products_list %}
+                        {% if product.category.name == "Features-Items" %}
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        {% if product.image %}
+                                            <img src="{{ product.image.url }}" alt="Image" width="268px" height="249px" />
+                                        {% endif %}
+                                        <h2>${{ product.price }}</h2>
+                                            <p>{{ product.title }}</p>
+                                            {% if user.is_authenticated %}
+                                                <a href="#" data-product="{{product.id}}" data-action="add" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            {% else %}
+                                                <a href="{% url 'login' %}" data-product="{{product.id}}" data-action="add" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            {% endif %}
+                                    </div>
+                                    <div class="product-overlay">
+                                        <div class="overlay-content">
+                                            <h2>${{ product.price }}</h2>
+                                            <p>{{ product.title }}</p>
+                                            {% if user.is_authenticated %}
+                                                <a href="#" data-product="{{product.id}}" data-action="add" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            {% else %}
+                                                <a href="{% url 'login' %}" data-product="{{product.id}}" data-action="add" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="choose">
+                                    <ul class="nav nav-pills nav-justified">
+                                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                      
+                    </div>
+                    
+                    <!--features_items-->
+                    
+                    <!--category-tab-->
+                    <div class="category-tab">
+
+                        <div class="col-sm-12"> 
+                            <ul class="nav nav-tabs"> <!--  -->
+                                {% for category in categories %}
+                                    {% if category.slug == 'main' %}
+                                        <li><a href="#{{category.slug}}" data-toggle="tab">{{ category.name }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="tab-content">
+                            {% for category in categories %}
+                                <div class="tab-pane fade" id="{{category.slug}}">
+                                    {% for product in products_list %}
+                                        {% if product.category.name == category.name %}
+                                            <div class="col-sm-3">
+                                                <div class="product-image-wrapper">
+                                                    <div class="single-products">
+                                                        <div class="productinfo text-center">
+                                                            {% if product.image %}
+                                                                <img src="{{ product.image.url }}" alt="Product Image" width="208px" height="183px" />
+                                                            {% endif %}
+                                                            <h2>${{product.price}}</h2>
+                                                            <p>{{product.title}}</p>
+                                                            {% if user.is_authenticated %}
+                                                                <a href="#" data-product="{{product.id}}" data-action="add" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                            {% else %}
+                                                                <a href="{% url 'login' %}" data-product="{{product.id}}" data-action="add" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!--cateogry_tab-->
+                    
+                    <!--recommended_items-->
+                    <div class="recommended_items">
+                        
+                        <h2 class="title text-center">recommended items</h2>
+    
+                        <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    {% for product in products_list %}
+                                        {% if product.category.name == "Recommended-Items" %}
+                                        <div class="col-sm-4">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        {% if product.image %}
+                                                            <img src="{{ product.image.url }}" alt="Image" width="268px" height="234px" />
+                                                        {% endif %}
+                                                        
+                                                        <h2>${{ product.price }}</h2>
+                                                        <p>{{ product.title }}</p>
+                                                        {% if user.is_authenticated %}
+                                                            <a href="#" data-product="{{product.id}}" data-action="add" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                        {% else %}
+                                                            <a href="{% url 'login' %}" data-product="{{product.id}}" data-action="add" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                        {% endif %}
+                                                    </div>
+        
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    
+                                </div>
+                                <div class="item">
+                                    {% for product in object_list %}
+                                        {% if product.category.name == "Recommended-Items" %}
+                                            <div class="col-sm-4">
+                                                <div class="product-image-wrapper">
+                                                    <div class="single-products">
+                                                        <div class="productinfo text-center">
+                                                            {% if product.image %}
+                                                                <img src="{{ product.image.url }}" alt="Image" width="268px" height="234px" />
+                                                            {% endif %}
+                                                            
+                                                            <h2>${{ product.price }}</h2>
+                                                            <p>{{ product.title }}</p>
+                                                            {% if user.is_authenticated %}
+                                                                <a href="#" data-product="{{product.id}}" data-action="add" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                            {% else %}
+                                                                <a href="{% url 'login' %}" data-product="{{product.id}}" data-action="add" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                            {% endif %}
+                                                        </div>
+            
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--/recommended_items-->
+    
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

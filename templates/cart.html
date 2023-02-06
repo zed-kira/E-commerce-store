@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block title %}Cart | Zed-store{% endblock title %}
+
+{% block content %}
+
+	<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="{% url 'home' %}">Home</a></li>
+				  <li class="active">Shopping Cart</li>
+				</ol>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Item</td>
+							<td class="description"></td>
+							<td class="price">Price</td>
+							<td class="quantity">Quantity</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						{% if items %}
+						{% for item in items %}
+						<tr id='demo-delete'>
+							<td class="cart_product">
+								{% if item.product.image %}
+									<a href=""><img src="{{ item.product.image.url }}" alt="Image" width="110px" height="110px" /></a>
+								{% endif %}
+								<!--<a href=""><img src="images/cart/one.png" alt=""></a>-->
+							</td>
+							<td class="cart_description">
+								<h4 style="text-align: center;">{{ item.product.title }}</h4>
+								<p style="text-align: center;">Web ID: {{ item.id }}</p>
+							</td>
+							<td class="cart_price">
+								<p>${{ item.product.price }}</p>
+							</td>
+							<td class="cart_quantity">
+								<div class="cart_quantity_button">
+									<button data-product="{{item.product.id}}" data-action="quantity-up" class="btn btn-default change-quantity" type="button"> + </button>
+										<input id="{{item.product.id}}" class="cart_quantity_input" type="text" name="quantity" value="{{ item.quantity }}"  autocomplete="off" size="2" readonly>
+									<button data-product="{{item.product.id}}" data-action="quantity-down" class="btn btn-default change-quantity" type="button"> - </button> 
+									
+									<!--<a class="cart_quantity_up" href=""> + </a>
+									<a class="cart_quantity_down" href=""> - </a>-->
+								</div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price" id="{{item.product.id}}">${{ item.get_total_price }}</p>
+							</td>
+							<td class="cart_delete">
+								<button data-product="{{item.product.id}}" data-action="delete" class="btn btn-default add-to-cart" type="button">
+									<i class="fa fa-times"></i> 
+								</button>      
+								<!--<a href="#" data-product="{{item.product.id}}" data-action="delete" class="btn btn-default add-to-cart">
+										<i class="fa fa-times"></i>
+								</a>   previous class name : cart_quantity_delete	 -->
+							</td>
+						</tr>
+						{% endfor %}
+						{% else %}
+							<tr>
+								<td class="cart_description">
+									<h4>  Your Cart is empty </h4>
+								</td>
+							</tr>
+						{% endif %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+
+	<section id="do_action">
+		<div class="container">
+			<div class="heading">
+				<h3>What would you like to do next?</h3>
+				<p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="chose_area">
+						<ul class="user_option">
+							<li>
+								<input type="checkbox">
+								<label>Use Coupon Code</label>
+							</li>
+							<li>
+								<input type="checkbox">
+								<label>Use Gift Voucher</label>
+							</li>
+							<li>
+								<input type="checkbox">
+								<label>Estimate Shipping & Taxes</label>
+							</li>
+						</ul>
+						<ul class="user_info">
+							<li class="single_field">
+								<label>Country:</label>
+								<select>
+									<option>United States</option>
+									<option>Bangladesh</option>
+									<option>UK</option>
+									<option>India</option>
+									<option>Pakistan</option>
+									<option>Ucrane</option>
+									<option>Canada</option>
+									<option>Dubai</option>
+								</select>
+								
+							</li>
+							<li class="single_field">
+								<label>Region / State:</label>
+								<select>
+									<option>Select</option>
+									<option>Dhaka</option>
+									<option>London</option>
+									<option>Dillih</option>
+									<option>Lahore</option>
+									<option>Alaska</option>
+									<option>Canada</option>
+									<option>Dubai</option>
+								</select>
+							
+							</li>
+							<li class="single_field zip-field">
+								<label>Zip Code:</label>
+								<input type="text">
+							</li>
+						</ul>
+						<a class="btn btn-default update" href="">Get Quotes</a>
+						<a class="btn btn-default check_out" href="">Continue</a>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="total_area">
+						<ul>
+							<li>Cart Sub Total <span>$59</span></li>
+							<li>Eco Tax <span>$2</span></li>
+							<li>Shipping Cost <span>Free</span></li>
+							<li>Total <span>$61</span></li>
+						</ul>
+							<a class="btn btn-default update" href="">Update</a>
+							<a class="btn btn-default check_out" href="">Check Out</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!--/#do_action-->
+
+{% endblock content %}

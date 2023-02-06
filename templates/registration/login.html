@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+    <section id="form">
+        <!--form-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-1">
+                    <div class="login-form" style="margin-top: 120px;">
+                        <!--login form-->
+                        <h2>Login to your account</h2>
+                        <form method="post">{% csrf_token %}
+                            {{ form|crispy }}
+                            <!--{{ form.username }}
+                            {{ form.password }}
+                            <input type="email" placeholder="Email Address" />
+                            <input type="password" placeholder="Password" />-->
+                            <span>
+                                <input type="checkbox" class="checkbox">
+                                Keep me signed in
+                            </span>
+                            <button type="submit" class="btn btn-default">Login</button>
+                            
+                            
+                        </form>
+                    </div>
+                    <!--/login form-->
+                    <div class="signup-link">
+                        <p>Don't have an account yet ?<a href="{% url 'signup' %}"> SignUp</a>
+                    </div>
+                </div>
+
+                <div class="col-sm-4" >
+                    <div class="login-img">
+                        <img src="{% static 'images/login/login.jpg' %}" alt="image"  /> <!--style="width:100%;height:100%;"-->
+                    </div>
+				</div>
+
+            </div>
+        </div>
+    </section>
+    <!--/form-->
+
+
+<!--<form method="post">{% csrf_token %}
+
+    {{ form.as_p }}
+    <button class="btn btn-success ml-2" type="submit">Log In</button>
+    
+</form>-->
+
+{% endblock content %}
