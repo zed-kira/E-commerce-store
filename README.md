@@ -1,12 +1,10 @@
 # E-commerce-store
-A demo E-commerce store with 10 pages as well as a fully functional cart
+A demo E-commerce store with a functional cart.
 
 # Installation :
 
 follow these steps to clone and get this app running :
 
-NOTE : you need to change the settings for the secret-key and database in config/settings.py for the app to run succesfully as well as making DEBUG=True .
- 
  - First clone this repo and install pipenv :
 
             $ git clone https://github.com/ouhadjilyes/E-commerce-store.git
